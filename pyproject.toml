@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fastmag1c"
+version = "0.1.0"
+description = "MAG1C methane retrieval with an exact rank-2 covariance update"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Cesar Aybar", email = "cesar.aybar@uv.es" }]
+requires-python = ">=3.10"
+dependencies = ["numpy", "torch", "safetensors"]
+
+[project.optional-dependencies]
+emit = ["h5py"]
+test = ["pytest"]
+
+[project.urls]
+Source = "https://github.com/csaybar/fastmag1c"
