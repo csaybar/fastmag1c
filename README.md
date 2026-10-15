@@ -9,7 +9,7 @@ fixed base covariance, so it can be done in O(Ns) with the same result.
 ## Installation
 
 ```bash
-pip install "fastmag1c[emit] @ git+https://github.com/csaybar/fastmag1c"
+pip install "fastmag1c[emit]"
 pip install earthaccess  # only to download the example granule
 ```
 
