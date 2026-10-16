@@ -6,8 +6,7 @@ For every granule in granules.json and for two spectral windows, runs both
 filters in float32 and float64 and writes results.csv. Plume pixels are the
 sensor pixels whose orthorectified position falls inside a plume polygon of
 the EMIT L2B CH4 plume catalog. Writes errors.csv and one figure per
-granule; runtimes are measured separately by timing.py. Granules not yet
-downloaded are skipped.
+granule. Granules not yet downloaded are skipped.
 """
 
 import csv

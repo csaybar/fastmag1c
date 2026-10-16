@@ -76,37 +76,10 @@ positive enhancement, with no spatial pattern. 50 band window.
 ![shanxi](figures/shanxi.png)
 ![black_sea](figures/black_sea.png)
 
-## Runtimes
-
-Mean and standard deviation of 5 runs after a warm-up, from timing.py, on an
-NVIDIA A100 80GB.
-
-Another user was training on the same GPU during these runs, so the times are
-noisy and the speedups too low. In two cases FastMAG1C even looks slower. We
-keep them here for completeness and do not use them as a benchmark. On an idle
-RTX A5500 the same code gave 2.7x with 50 bands and 3.9x with 128 bands in
-float64 on the black_sea granule.
-
-| Granule | Bands | float64 MAG1C (s) | float64 FastMAG1C (s) | float64 speedup | float32 MAG1C (s) | float32 FastMAG1C (s) | float32 speedup |
-|---|---|---|---|---|---|---|---|
-| turkmenistan | 50 | 0.85 ± 0.09 | 0.65 ± 0.05 | 1.31x | 0.79 ± 0.06 | 0.59 ± 0.12 | 1.34x |
-| turkmenistan | 128 | 1.66 ± 0.07 | 1.26 ± 0.19 | 1.31x | 1.37 ± 0.08 | 1.24 ± 0.05 | 1.11x |
-| permian | 50 | 0.98 ± 0.14 | 1.21 ± 0.05 | 0.81x | 0.96 ± 0.13 | 0.78 ± 0.17 | 1.23x |
-| permian | 128 | 1.72 ± 0.09 | 1.25 ± 0.06 | 1.38x | 1.25 ± 0.00 | 0.98 ± 0.21 | 1.28x |
-| buenos_aires | 50 | 0.47 ± 0.01 | 0.62 ± 0.11 | 0.75x | 0.81 ± 0.12 | 0.61 ± 0.02 | 1.33x |
-| buenos_aires | 128 | 1.67 ± 0.07 | 1.27 ± 0.06 | 1.31x | 1.25 ± 0.00 | 0.86 ± 0.12 | 1.45x |
-| campeche | 50 | 0.85 ± 0.08 | 0.71 ± 0.07 | 1.19x | 0.78 ± 0.10 | 0.60 ± 0.00 | 1.30x |
-| campeche | 128 | 1.64 ± 0.10 | 1.26 ± 0.05 | 1.30x | 1.25 ± 0.00 | 0.86 ± 0.14 | 1.45x |
-| shanxi | 50 | 0.82 ± 0.07 | 0.65 ± 0.05 | 1.27x | 0.81 ± 0.07 | 0.59 ± 0.05 | 1.37x |
-| shanxi | 128 | 1.72 ± 0.11 | 1.27 ± 0.03 | 1.36x | 1.25 ± 0.00 | 0.86 ± 0.11 | 1.46x |
-| black_sea | 50 | 1.20 ± 0.03 | 0.96 ± 0.08 | 1.25x | 1.17 ± 0.09 | 0.69 ± 0.07 | 1.68x |
-| black_sea | 128 | 2.45 ± 0.11 | 1.62 ± 0.20 | 1.51x | 1.83 ± 0.11 | 1.09 ± 0.10 | 1.67x |
-
 ## Reproduce
 
 ```bash
 pip install "fastmag1c[emit]" earthaccess matplotlib
 python download.py DATA_DIR   # needs an Earthdata login
 python run.py DATA_DIR        # errors.csv and figures
-python timing.py DATA_DIR     # times.csv, use an idle GPU
 ```
