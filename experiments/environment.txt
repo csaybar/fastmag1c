@@ -1,0 +1,9 @@
+fastmag1c 0.1.0
+torch 2.6.0+cu124, CUDA 12.4
+python 3.13.13
+cpu Intel(R) Xeon(R) Silver 4210R CPU @ 2.40GHz
+cpu threads used by torch 20
+blas MKL
+gpu 0 NVIDIA RTX A5500, 24 GiB
+driver 550.163.01
+tf32 disabled for float32 matrix products
