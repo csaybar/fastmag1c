@@ -1,7 +1,7 @@
 # MAG1C and FastMAG1C on EMIT plume scenes
 
 We ran both filters on five EMIT L1B granules with plumes from the EMIT L2B
-CH4 plume catalog, and on one granule over the Black Sea coast with no
+CH4 plume catalog, and on one granule over the Sea of Azov with no
 catalogued plume. Every granule was retrieved with 50 bands (2122 to 2488 nm)
 and with 128 bands (1550 to 2493 nm), in float64 and in float32, with 30
 iterations.
@@ -19,7 +19,7 @@ ppm·m.
 | buenos_aires | urban, landfill | EMIT_L1B_RAD_001_20231124T142642_2332809_049 | 1 |
 | campeche | offshore, oil platforms | EMIT_L1B_RAD_001_20240823T173814_2423611_036 | 1 |
 | shanxi | mountainous, coal mines | EMIT_L1B_RAD_001_20240217T052731_2404804_010 | 3 |
-| black_sea | coastal, no plume | EMIT_L1B_RAD_001_20240604T140353_2415609_030 | 0 |
+| black_sea (Sea of Azov) | coastal, no plume | EMIT_L1B_RAD_001_20240604T140353_2415609_030 | 0 |
 
 The plume polygons are in [granules.json](granules.json).
 
@@ -39,6 +39,28 @@ Largest |FastMAG1C - MAG1C| with both filters in float64.
 The worst case over every granule and window is 3e-4 ppm·m, and 1.1e-5 ppm·m
 inside the plumes. In float64 the two filters produce the same map. What is
 left comes from summing in a different order.
+
+## Runtime across plume granules
+
+We also timed both filters on the five plume granules (1280 x 1242 pixels
+each) on an NVIDIA RTX A5500. These are end-to-end GPU retrievals in float64,
+with batch size 64 and 30 iterations. Each number is the ratio of the mean
+MAG1C time to the mean FastMAG1C time over five runs after warm-up. The
+individual times are in [runtime_a5500_plumes.csv](runtime_a5500_plumes.csv).
+
+| Granule | 50 bands | 128 bands |
+|---|---:|---:|
+| turkmenistan | 1.73x | 2.67x |
+| permian | 1.79x | 2.85x |
+| buenos_aires | 1.80x | 2.75x |
+| campeche | 1.85x | 2.61x |
+| shanxi | 1.76x | 2.60x |
+
+FastMAG1C is faster for every plume granule and both windows. These scenes
+have fewer rows than the full Sea of Azov granule used in the main runtime
+experiment (2528 x 1242 pixels); its timings are reported
+[separately](../emit_runtime/REPORT.md). The commands that produced this CSV
+are in [benchmark_runtime.py](benchmark_runtime.py).
 
 ## Float32
 
@@ -82,4 +104,5 @@ positive enhancement, with no spatial pattern. 50 band window.
 pip install "fastmag1c[emit]" earthaccess matplotlib
 python download.py DATA_DIR   # needs an Earthdata login
 python run.py DATA_DIR        # errors.csv and figures
+python benchmark_runtime.py OUTPUT.csv GRANULE.nc [GRANULE.nc ...]
 ```
