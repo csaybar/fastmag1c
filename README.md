@@ -81,3 +81,9 @@ values matter.
 ## License
 
 MIT. See [`LICENSE`](LICENSE).
+
+## Acknowledgements
+
+This work was supported by the Spanish Ministry of Science, Innovation and Universities (grant PID2023-148485OB-C21 funded by MCIU/AEI/10.13039/501100011033 ERDF, EU).
+
+<img src="https://www.uv.es/chovago/logos/logoMICIN.jpg" alt="Spanish Ministry of Science, Innovation and Universities logo" width="320">
